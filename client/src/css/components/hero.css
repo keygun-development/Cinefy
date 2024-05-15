@@ -1,0 +1,53 @@
+.hero {
+    position: relative;
+    max-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .sliding-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation: slideImage 10s linear infinite;
+    }
+
+    .text-background-gradient {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+
+        .extras {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            margin-top: 1rem;
+        }
+    }
+}
+
+@keyframes slideImage {
+    0% {
+        transform: translateX(0%) scale(1.5);
+    }
+    100% {
+        transform: translateX(-10%) scale(1.4);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero {
+        display: none;
+    }
+}

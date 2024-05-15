@@ -1,15 +1,17 @@
 {
-  "name": "backend",
+  "name": "server",
   "version": "1.0.0",
   "description": "The express api for Cinefy",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js --watch"
+    "start": "node src/index.js",
+    "db": "node src/sqlite.js"
   },
   "author": "keygun-development",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^10.0.0",
     "express": "^4.19.2"
   }
 }

@@ -1,0 +1,22 @@
+.button-primary {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-size: 16px;
+    transition: background 0.3s;
+    display: inline-block;
+    border: 0;
+
+    &:hover {
+        background: var(--color-secondary);
+    }
+
+    &.rounded-full {
+        border-radius: 50px;
+    }
+
+    &.small {
+        padding: 5px 10px;
+    }
+}
