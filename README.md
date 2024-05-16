@@ -22,3 +22,6 @@ npm run dev
 ```
 
 This will start the server and the application will be up and running.
+
+## Github pages
+Visit https://keygun-development.github.io/Cinefy/client/ to view the website.
