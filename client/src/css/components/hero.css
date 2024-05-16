@@ -10,10 +10,15 @@
         height: 100%;
         object-fit: cover;
         animation: slideImage 10s linear infinite;
+        transition: opacity 1s ease-in-out;
+        opacity: 1;
+
+        &.fade-out {
+            opacity: 0;
+        }
 
         &:hover {
             cursor: url('../../images/play.svg'), auto;
-            animation-play-state: paused;
         }
     }
 }
@@ -40,6 +45,10 @@
     button {
         margin-top: 1rem;
     }
+}
+
+.hidden {
+    opacity: 0;
 }
 
 @keyframes slideImage {
