@@ -42,7 +42,7 @@ window.onload = function () {
 
     if (slidingImage) {
         let index = 0;
-
+        slidingImage.classList.add('animate')
         setInterval(() => {
             slidingImage.classList.add('fade-out');
 
