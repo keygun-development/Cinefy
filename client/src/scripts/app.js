@@ -10,4 +10,27 @@ window.onload = function () {
     if (watchlist) {
         Slider.init('watchlist');
     }
+
+    const movies = document.getElementsByClassName('movie');
+    const modal = document.getElementById('modal');
+    const back = document.getElementById('back');
+    for (let i = 0; i < movies.length; i++) {
+        movies[i].addEventListener('click', function () {
+            if(!modal.classList.contains('active')) {
+                modal.classList.add('active');
+                document.body.classList.add('no-scroll');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+
+    if (back) {
+        back.addEventListener('click', function () {
+            modal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+    }
 }

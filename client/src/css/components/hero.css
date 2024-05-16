@@ -10,30 +10,35 @@
         height: 100%;
         object-fit: cover;
         animation: slideImage 10s linear infinite;
-    }
 
-    .text-background-gradient {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        height: 100%;
+        &:hover {
+            cursor: url('../../images/play.svg'), auto;
+            animation-play-state: paused;
+        }
+    }
+}
+
+.text-background-gradient {
+    position: absolute;
+    left: 0;
+    right: 50%;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+
+    .extras {
         display: flex;
         align-items: center;
-        background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+        margin-top: 1rem;
+        gap: .5rem;
+        margin-bottom: 1rem;
+    }
 
-        .extras {
-            display: flex;
-            align-items: center;
-            margin-top: 1rem;
-            gap: .5rem;
-            margin-bottom: 1rem;
-        }
-
-        button {
-            margin-top: 1rem;
-        }
+    button {
+        margin-top: 1rem;
     }
 }
 
@@ -49,5 +54,9 @@
 @media screen and (max-width: 768px) {
     .hero {
         display: none;
+    }
+
+    .text-background-gradient {
+        right: 0;
     }
 }

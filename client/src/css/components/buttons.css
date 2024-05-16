@@ -19,4 +19,18 @@
     &.small {
         padding: 5px 10px;
     }
+
+    &.pointer {
+        cursor: pointer;
+    }
+}
+
+.button-back {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    cursor: pointer;
 }
