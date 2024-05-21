@@ -15,10 +15,6 @@
             opacity: 0;
         }
 
-        &.animate {
-            animation: slideImage 10s linear infinite;
-        }
-
         &:hover {
             cursor: url('../../images/play.svg'), auto;
         }
@@ -51,18 +47,6 @@
 
 .hidden {
     opacity: 0;
-}
-
-@keyframes slideImage {
-    0% {
-        transform: translateX(0%) scale(1.5);
-    }
-    80% {
-        transform: translateX(-10%) scale(1.4);
-    }
-    100% {
-        transform: translateX(-10%) scale(1.4);
-    }
 }
 
 @media screen and (max-width: 768px) {

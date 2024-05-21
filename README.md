@@ -2,26 +2,36 @@
 
 Cinefy is a web application that allows users to watch films and series online.
 The application consists of a client and a server. The client is built with HTML, CSS and Javascript.
-The server is built with Node.js and Express.js.
+The server is built with Node.js and express.
 
 ## Starting the application
 
-To start the application, you need to run the following commands:
+### Prerequisites
+1. Clone the repository
+2. Install Node.js
 
+### Client
+
+1. Navigate to the client folder in your editor
+2. Open the index.html file using your browser
+
+### Server
+
+1. Navigate to the server folder using the terminal
+2. Run the following command to install the required packages
 ```bash
-cd client
-```
-
-For now open the index.html using live server or any other method.
-Once the client is running, run the following commands:
-
-```bash
-cd ../server
 npm install
-npm run dev
 ```
 
-This will start the server and the application will be up and running.
+3. Run the following command to setup the database
+```bash
+npm run db
+```
+4. Run the following command to start the server
+```bash
+npm run start
+```
 
 ## Github pages
-Visit https://keygun-development.github.io/Cinefy/client/ to view the website.
+A live version of the website is hosted on Github pages!
+See: https://keygun-development.github.io/Cinefy/client/

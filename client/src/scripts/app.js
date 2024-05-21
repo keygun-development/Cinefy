@@ -40,17 +40,33 @@ window.onload = function () {
         "https://phantom-marca.unidadeditorial.es/1dae96dc691d041105915b4915754bc8/crop/0x0/1597x899/resize/828/f/jpg/assets/multimedia/imagenes/2021/10/01/16330974723192.png"
     ];
 
-    if (slidingImage) {
-        let index = 0;
-        slidingImage.classList.add('animate')
-        setInterval(() => {
-            slidingImage.classList.add('fade-out');
+    let currentIndex = 0;
+    let startTime = null;
 
+    function animateImage(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / 8000, 1);
+
+        slidingImage.style.transform = `translateX(${(-10) * progress}%) scale(${1.5 + (1.4 - 1.5) * progress})`;
+
+        if (progress < 1) {
+            requestAnimationFrame(animateImage);
+        } else {
+            slidingImage.style.opacity = '0';
             setTimeout(() => {
-                index = (index + 1) % imagesToScroll.length;
-                slidingImage.src = imagesToScroll[index];
-                slidingImage.classList.remove('fade-out');
-            }, 1200);
-        }, 9000);
+                currentIndex = (currentIndex + 1) % imagesToScroll.length;
+                slidingImage.src = imagesToScroll[currentIndex];
+                startTime = null;
+                slidingImage.style.opacity = '1';
+                requestAnimationFrame(animateImage);
+            }, 1000);
+        }
+    }
+
+    if (slidingImage) {
+        slidingImage.src = imagesToScroll[currentIndex];
+        slidingImage.style.opacity = '1';
+        requestAnimationFrame(animateImage);
     }
 }
