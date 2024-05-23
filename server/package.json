@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
     "db": "node src/sqlite.js"
   },
   "author": "keygun-development",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^10.0.0",
-    "express": "^4.19.2"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "http-status-codes": "^2.3.0"
   }
 }

@@ -1,9 +1,35 @@
 import Slider from "./slide.js";
 
+// Unfortunately we can't use a .env file and use process.env (Node.js functionality) to define the API URL
+// So I've hardcoded the URL here, if you want to change it, you can do it here
+const API_URL = 'http://localhost:3000/api/v1';
+const getMovies = async () => {
+    const res = await fetch(`${API_URL}/movies`);
+    return await res.json();
+}
+
+const getGenreById = async (id) => {
+    const res = await fetch(`${API_URL}/genres/${id}`);
+    return await res.json();
+}
+
 window.onload = function () {
     // I've created a Slider class to reduce code duplication
     const trending = document.getElementById('trending');
     const watchlist = document.getElementById('watchlist');
+    const modal = document.getElementById('modal');
+
+    const slidingImage = document.getElementById('sliding-image');
+    const slidingTitle = document.getElementById('sliding-title');
+    const slidingGenre = document.getElementById('sliding-genre');
+    const slidingYear = document.getElementById('sliding-year');
+    const slidingDescription = document.getElementById('sliding-description');
+    const slidingButton = document.getElementById('sliding-button');
+
+    const imageObjectsToScroll = [];
+    let currentIndex = 0;
+    let startTime = null;
+
     if (trending) {
         Slider.init('trending')
     }
@@ -11,21 +37,44 @@ window.onload = function () {
         Slider.init('watchlist');
     }
 
-    const movies = document.getElementsByClassName('movie');
-    const modal = document.getElementById('modal');
-    const back = document.getElementById('back');
-    for (let i = 0; i < movies.length; i++) {
-        movies[i].addEventListener('click', function () {
-            if (!modal.classList.contains('active')) {
-                modal.classList.add('active');
-                document.body.classList.add('no-scroll');
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
+    getMovies().then(movies => {
+        movies.forEach(m => {
+            const movie = document.createElement('div');
+            movie.classList.add('card', 'movie');
+            movie.innerHTML = `
+                    <img src="${m.thumbnail}" alt="${m.title}">
+                    `;
+            trending.appendChild(movie);
+            movie.addEventListener('click', function () {
+                if (!modal.classList.contains('active')) {
+                    modal.classList.add('active');
+                    window.scrollTo({
+                        top: 0
+                    });
+                    document.body.classList.add('no-scroll');
+                }
+            });
+
+            const genre = getGenreById(m.genreId);
+
+            genre.then(genre => {
+                m.genre = genre.name;
+                console.log(m.genre)
+            })
+
+            imageObjectsToScroll.push(m);
         });
-    }
+
+        setTimeout(() => {
+            if (slidingImage) {
+                slidingImage.style.opacity = '1';
+                setSlidingInfo();
+                requestAnimationFrame(animateImage);
+            }
+        }, 1000)
+    });
+
+    const back = document.getElementById('back');
 
     if (back) {
         back.addEventListener('click', function () {
@@ -34,14 +83,13 @@ window.onload = function () {
         });
     }
 
-    const slidingImage = document.getElementById('sliding-image');
-    const imagesToScroll = [
-        "https://occ-0-6144-768.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABer7SeWc6FvkBqWtk61GwL7rshAEVCOARQZVTEJGnLXykYBlO4nbbr6gs7M650BjULuaN6hucXKr5xY2iqPAajrxXd70HawdJeuD.jpg?r=608",
-        "https://phantom-marca.unidadeditorial.es/1dae96dc691d041105915b4915754bc8/crop/0x0/1597x899/resize/828/f/jpg/assets/multimedia/imagenes/2021/10/01/16330974723192.png"
-    ];
-
-    let currentIndex = 0;
-    let startTime = null;
+    function setSlidingInfo() {
+        slidingImage.src = imageObjectsToScroll[currentIndex].thumbnail;
+        slidingTitle.textContent = imageObjectsToScroll[currentIndex].title;
+        slidingGenre.textContent = imageObjectsToScroll[currentIndex].genre;
+        slidingYear.textContent = imageObjectsToScroll[currentIndex].year;
+        slidingDescription.textContent = imageObjectsToScroll[currentIndex].description;
+    }
 
     function animateImage(timestamp) {
         if (!startTime) startTime = timestamp;
@@ -55,18 +103,12 @@ window.onload = function () {
         } else {
             slidingImage.style.opacity = '0';
             setTimeout(() => {
-                currentIndex = (currentIndex + 1) % imagesToScroll.length;
-                slidingImage.src = imagesToScroll[currentIndex];
+                currentIndex = (currentIndex + 1) % imageObjectsToScroll.length;
+                setSlidingInfo();
                 startTime = null;
                 slidingImage.style.opacity = '1';
                 requestAnimationFrame(animateImage);
             }, 1000);
         }
-    }
-
-    if (slidingImage) {
-        slidingImage.src = imagesToScroll[currentIndex];
-        slidingImage.style.opacity = '1';
-        requestAnimationFrame(animateImage);
     }
 }

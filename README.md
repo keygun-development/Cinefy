@@ -35,3 +35,5 @@ npm run start
 ## Github pages
 A live version of the website is hosted on Github pages!
 See: https://keygun-development.github.io/Cinefy/client/
+
+> **_NOTE:_**  I'm assuming that the server is running on localhost:3000. If you want to run the server on a different port, you need to change the request URL in the client code.
