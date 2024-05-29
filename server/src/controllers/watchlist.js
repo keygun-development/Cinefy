@@ -25,6 +25,24 @@ export function getWatchlistByUserId(req, res) {
   return res.status(StatusCodes.OK).json(userWatchlist);
 }
 
+export function addMovieToUserWatchlist(req, res) {
+  const userId = parseInt(req.params.userId);
+  const movieId = parseInt(req.params.movieId);
+  const watchlist = watchlists.find(
+    (w) => w.userId === userId && w.movieId === movieId,
+  );
+
+  if (watchlist) {
+    return res.status(StatusCodes.CONFLICT).json({
+      message: "Movie already exists in user watchlist",
+    });
+  }
+
+  watchlists.push({ userId, movieId });
+
+  return res.status(StatusCodes.CREATED).send();
+}
+
 export function removeMovieFromUserWatchlist(req, res) {
   const userId = parseInt(req.params.userId);
   const movieId = parseInt(req.params.movieId);
