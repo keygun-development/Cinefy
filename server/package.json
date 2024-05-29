@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "The express api for Cinefy",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "node --watch src/index.js",
-    "db": "node src/sqlite.js"
+    "dev": "node --watch src/index.js"
   },
   "author": "keygun-development",
   "license": "ISC",

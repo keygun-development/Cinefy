@@ -17,8 +17,7 @@
         margin-top: 1rem;
 
         &.card-scroll-list {
-            overflow-x: scroll;
-            overflow-y: hidden;
+            overflow: auto;
             display: flex;
             gap: 1rem;
             padding-bottom: 1rem;

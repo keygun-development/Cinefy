@@ -59,7 +59,6 @@ window.onload = function () {
 
             genre.then(genre => {
                 m.genre = genre.name;
-                console.log(m.genre)
             })
 
             imageObjectsToScroll.push(m);
