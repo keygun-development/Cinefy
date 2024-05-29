@@ -28,7 +28,7 @@ export function getGenreById(req, res) {
 
     return res
         .status(StatusCodes.OK)
-        .json(genre);
+        .json(genre[0]);
 }
 
 export function getMoviesByGenreId(req, res) {
