@@ -1,18 +1,4 @@
-export const genres = [
-  { id: 1, name: "Action" },
-  { id: 2, name: "Horror" },
-  { id: 3, name: "Comedy" },
-  { id: 4, name: "Sci-Fi" },
-];
-
-export const users = [
-  { id: 1, firstname: "John", lastname: "Doe" },
-  { id: 2, firstname: "Jane", lastname: "Doe" },
-  { id: 3, firstname: "Alice", lastname: "Smith" },
-  { id: 4, firstname: "Bob", lastname: "Smith" },
-];
-
-export const movies = [
+export default [
   {
     id: 1,
     title: "The Terminator",
@@ -73,13 +59,4 @@ export const movies = [
     description:
       "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits with deadly high stakes. A survival game that has a whopping 45.6 billion-won prize at stake.",
   },
-];
-
-export const watchlists = [
-  { userId: 1, movieId: 1 },
-  { userId: 1, movieId: 2 },
-  { userId: 2, movieId: 3 },
-  { userId: 3, movieId: 4 },
-  { userId: 4, movieId: 1 },
-  { userId: 4, movieId: 3 },
 ];

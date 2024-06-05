@@ -1,4 +1,4 @@
-import { watchlists } from "../data.js";
+import watchlists from "../seeders/watchlist.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export function getWatchlists(req, res) {

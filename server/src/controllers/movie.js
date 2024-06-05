@@ -1,4 +1,4 @@
-import { movies } from "../data.js";
+import movies from "../seeders/movie.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export function getMovies(req, res) {

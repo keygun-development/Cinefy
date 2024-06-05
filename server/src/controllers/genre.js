@@ -1,4 +1,5 @@
-import { genres, movies } from "../data.js";
+import genres from "../seeders/genre.js";
+import movies from "../seeders/movie.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export function getGenres(req, res) {
