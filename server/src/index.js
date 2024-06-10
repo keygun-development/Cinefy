@@ -4,6 +4,10 @@ import genreRouter from "./routers/genre.js";
 import userRouter from "./routers/user.js";
 import movieRouter from "./routers/movie.js";
 import watchlistRouter from "./routers/watchlist.js";
+import "./database/migrations/genre.js";
+import "./database/migrations/movie.js";
+import "./database/migrations/user.js";
+import "./database/migrations/watchlist.js";
 
 const app = express();
 

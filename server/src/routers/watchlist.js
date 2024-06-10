@@ -3,6 +3,7 @@ import {
   getWatchlistByUserId,
   getWatchlists,
   removeMovieFromUserWatchlist,
+  addMovieToUserWatchlist,
 } from "../controllers/watchlist.js";
 
 const router = express.Router();

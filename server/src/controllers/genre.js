@@ -1,5 +1,5 @@
-import genres from "../seeders/genre.js";
-import movies from "../seeders/movie.js";
+import genres from "../database/seeders/genre.js";
+import movies from "../database/seeders/movie.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export function getGenres(req, res) {
@@ -23,7 +23,7 @@ export function getGenreById(req, res) {
     });
   }
 
-  return res.status(StatusCodes.OK).json(genre[0]);
+  return res.status(StatusCodes.OK).json(genre);
 }
 
 export function getMoviesByGenreId(req, res) {

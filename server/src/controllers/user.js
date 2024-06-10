@@ -1,5 +1,5 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import users from "../seeders/user.js";
+import users from "../database/seeders/user.js";
 
 export function getUsers(req, res) {
   return res.status(StatusCodes.OK).json(users);
