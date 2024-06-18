@@ -1,20 +1,41 @@
-import watchlists from "../database/seeders/watchlist.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import {
+  addMovieToUserWatchlistQuery,
+  getMovieFromUserWatchlistQuery,
+  getWatchlistByUserIdQuery,
+  getWatchlistMoviesByUserIdQuery,
+  getWatchlistsQuery,
+  removeMovieFromUserWatchlistQuery,
+} from "../database/queries/watchlist.js";
 
 export function getWatchlists(req, res) {
-  const { movie } = req.query;
-  let result = [...watchlists];
+  const watchlists = getWatchlistsQuery();
 
-  if (movie) {
-    result = result.filter((w) => w.movieId === parseInt(movie));
+  if (!watchlists) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: ReasonPhrases.NOT_FOUND,
+    });
   }
 
-  return res.status(StatusCodes.OK).json(result);
+  return res.status(StatusCodes.OK).json(watchlists);
 }
 
 export function getWatchlistByUserId(req, res) {
   const userId = parseInt(req.params.userId);
-  const userWatchlist = watchlists.filter((w) => w.userId === userId);
+  const userWatchlist = getWatchlistByUserIdQuery(userId);
+
+  if (!userWatchlist) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: ReasonPhrases.NOT_FOUND,
+    });
+  }
+
+  return res.status(StatusCodes.OK).json(userWatchlist);
+}
+
+export function getWatchlistMoviesByUserId(req, res) {
+  const userId = parseInt(req.params.userId);
+  const userWatchlist = getWatchlistMoviesByUserIdQuery(userId);
 
   if (!userWatchlist) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -28,9 +49,7 @@ export function getWatchlistByUserId(req, res) {
 export function addMovieToUserWatchlist(req, res) {
   const userId = parseInt(req.params.userId);
   const movieId = parseInt(req.params.movieId);
-  const watchlist = watchlists.find(
-    (w) => w.userId === userId && w.movieId === movieId,
-  );
+  const watchlist = getMovieFromUserWatchlistQuery(userId, movieId);
 
   if (watchlist) {
     return res.status(StatusCodes.CONFLICT).json({
@@ -38,7 +57,7 @@ export function addMovieToUserWatchlist(req, res) {
     });
   }
 
-  watchlists.push({ userId, movieId });
+  addMovieToUserWatchlistQuery(userId, movieId);
 
   return res.status(StatusCodes.CREATED).send();
 }
@@ -46,8 +65,8 @@ export function addMovieToUserWatchlist(req, res) {
 export function removeMovieFromUserWatchlist(req, res) {
   const userId = parseInt(req.params.userId);
   const movieId = parseInt(req.params.movieId);
-  const index = watchlists.findIndex(
-    (w) => w.userId === userId && w.movieId === movieId,
+  const index = getWatchlistByUserIdQuery(userId).findIndex(
+    (w) => w.movieId === movieId,
   );
 
   if (index === -1) {
@@ -56,7 +75,7 @@ export function removeMovieFromUserWatchlist(req, res) {
     });
   }
 
-  watchlists.splice(index, 1);
+  removeMovieFromUserWatchlistQuery(userId, movieId);
 
   return res.status(StatusCodes.NO_CONTENT).send();
 }

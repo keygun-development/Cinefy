@@ -1,29 +1,25 @@
-import movies from "../database/seeders/movie.js";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import {
+  getMovieByIdQuery,
+  getMoviesQuery,
+} from "../database/queries/movie.js";
 
 export function getMovies(req, res) {
   let { per_page, page, genre } = req.query;
-  let result = [...movies];
+  const movies = getMoviesQuery(per_page, page, genre);
 
-  per_page = parseInt(per_page);
-  page = parseInt(page);
-
-  if (genre) {
-    result = result.filter((m) => m.genreId === parseInt(genre));
+  if (!movies) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: ReasonPhrases.NOT_FOUND,
+    });
   }
 
-  if (!isNaN(per_page)) {
-    const start = !isNaN(page) ? (page - 1) * per_page : 0;
-    const end = start + per_page;
-    result = result.slice(start, end);
-  }
-
-  return res.status(StatusCodes.OK).json(result);
+  return res.status(StatusCodes.OK).json(movies);
 }
 
 export function getMovieById(req, res) {
   const id = parseInt(req.params.id);
-  const movie = movies.find((m) => m.id === id);
+  const movie = getMovieByIdQuery(id);
 
   if (!movie) {
     return res.status(StatusCodes.NOT_FOUND).json({

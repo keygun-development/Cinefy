@@ -1,17 +1,10 @@
 import Slider from "./slide.js";
-
-// Unfortunately we can't use a .env file and use process.env (Node.js functionality) to define the API URL
-// So I've hardcoded the URL here, if you want to change it, you can do it here
-const API_URL = "http://localhost:3000/api/v1";
-const getMovies = async () => {
-  const res = await fetch(`${API_URL}/movies`);
-  return await res.json();
-};
-
-const getGenreById = async (id) => {
-  const res = await fetch(`${API_URL}/genres/${id}`);
-  return await res.json();
-};
+import { getMovies } from "./queries/movie.js";
+import { getGenreById } from "./queries/genre.js";
+import {
+  addMovieToWatchlist,
+  getWatchlistMovies,
+} from "./queries/watchlist.js";
 
 window.onload = function () {
   const trending = document.getElementById("trending");
@@ -25,6 +18,15 @@ window.onload = function () {
   const slidingDescription = document.getElementById("sliding-description");
   const slidingButton = document.getElementById("sliding-button");
 
+  if (slidingButton) {
+    slidingButton.addEventListener("click", async function () {
+      const movieId = this.getAttribute("data-movieid");
+      await addMovieToWatchlist(movieId);
+      this.textContent = "Added to watchlist";
+      slidingButton.disabled = true;
+    });
+  }
+
   const imageObjectsToScroll = [];
   let currentIndex = 0;
   let startTime = null;
@@ -32,16 +34,12 @@ window.onload = function () {
   if (trending) {
     // I've created a Slider class to reduce code duplication
     Slider.init("trending");
-  }
-  if (watchlist) {
-    Slider.init("watchlist");
-  }
 
-  if (trending) {
     getMovies().then((movies) => {
       movies.forEach((m) => {
         const movie = document.createElement("div");
         movie.classList.add("card");
+        movie.setAttribute("data-trigger", "true");
         movie.innerHTML = `
                     <img src="${m.thumbnail}" alt="${m.title}">
                     `;
@@ -49,6 +47,7 @@ window.onload = function () {
         movie.addEventListener("click", function () {
           if (!modal.classList.contains("active")) {
             modal.classList.add("active");
+            modal.setAttribute("data-open", "true");
             window.scrollTo({
               top: 0,
             });
@@ -66,6 +65,15 @@ window.onload = function () {
       });
 
       if (slidingImage) {
+        slidingImage.setAttribute("data-trigger", "true");
+        slidingImage.addEventListener("click", function () {
+          modal.classList.add("active");
+          modal.setAttribute("data-open", "true");
+          window.scrollTo({
+            top: 0,
+          });
+          document.body.classList.add("no-scroll");
+        });
         setTimeout(() => {
           slidingImage.style.opacity = "1";
           setSlidingInfo();
@@ -75,22 +83,55 @@ window.onload = function () {
     });
   }
 
+  if (watchlist) {
+    Slider.init("watchlist");
+
+    getWatchlistMovies().then((movies) => {
+      movies.forEach((m) => {
+        const movie = document.createElement("div");
+        movie.classList.add("card");
+        movie.setAttribute("data-trigger", "true");
+        movie.innerHTML = `
+                    <img src="${m.thumbnail}" alt="${m.title}">
+                    `;
+        watchlist.appendChild(movie);
+        movie.addEventListener("click", function () {
+          if (!modal.classList.contains("active")) {
+            modal.classList.add("active");
+            modal.setAttribute("data-open", "true");
+            window.scrollTo({
+              top: 0,
+            });
+            document.body.classList.add("no-scroll");
+          }
+        });
+      });
+    });
+  }
+
   const back = document.getElementById("back");
 
   if (back) {
     back.addEventListener("click", function () {
       modal.classList.remove("active");
+      modal.setAttribute("data-open", "false");
       document.body.classList.remove("no-scroll");
     });
   }
 
   function setSlidingInfo() {
+    slidingButton.textContent = "Add to watchlist";
+    slidingButton.disabled = false;
     slidingImage.src = imageObjectsToScroll[currentIndex].thumbnail;
     slidingTitle.textContent = imageObjectsToScroll[currentIndex].title;
     slidingGenre.textContent = imageObjectsToScroll[currentIndex].genre;
     slidingYear.textContent = imageObjectsToScroll[currentIndex].year;
     slidingDescription.textContent =
       imageObjectsToScroll[currentIndex].description;
+    slidingButton.setAttribute(
+      "data-movieid",
+      imageObjectsToScroll[currentIndex].id,
+    );
   }
 
   function animateImage(timestamp) {
