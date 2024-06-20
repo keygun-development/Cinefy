@@ -6,7 +6,7 @@ export function seed() {
 
   if (movieCount["COUNT(*)"] === 0) {
     const insertMovie = db.prepare(
-      "INSERT INTO movies (title, description, thumbnail, year, link, genreId) VALUES (@title, @description, @thumbnail, @year, @link, @genreId)",
+      "INSERT INTO movies (title, description, thumbnail, year, link, genre_id) VALUES (@title, @description, @thumbnail, @year, @link, @genreId)",
     );
 
     movies.forEach((movie) => {

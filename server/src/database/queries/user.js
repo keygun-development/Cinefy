@@ -7,3 +7,11 @@ export function getUsersQuery() {
 export function getUserByIdQuery(id) {
   return db.prepare("SELECT * FROM users WHERE id = ?").get(id);
 }
+
+export function updateUserQuery(id, user) {
+  db.prepare("UPDATE users SET firstname = ?, lastname = ? WHERE id = ?").run(
+    user.firstname,
+    user.lastname,
+    id,
+  );
+}

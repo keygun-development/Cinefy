@@ -7,6 +7,7 @@ import {
   getWatchlistsQuery,
   removeMovieFromUserWatchlistQuery,
 } from "../database/queries/watchlist.js";
+import { getMovieByIdQuery } from "../database/queries/movie.js";
 
 export function getWatchlists(req, res) {
   const watchlists = getWatchlistsQuery();
@@ -59,7 +60,9 @@ export function addMovieToUserWatchlist(req, res) {
 
   addMovieToUserWatchlistQuery(userId, movieId);
 
-  return res.status(StatusCodes.CREATED).send();
+  const movie = getMovieByIdQuery(movieId);
+
+  return res.status(StatusCodes.CREATED).json(movie);
 }
 
 export function removeMovieFromUserWatchlist(req, res) {

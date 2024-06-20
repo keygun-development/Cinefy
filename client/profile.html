@@ -25,18 +25,18 @@
     </li>
   </ul>
   <a href="profile.html">
-    <img alt="Profielfoto" src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=richard-bevers" />
+    <img id="profile-picture" alt="Profielfoto" src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=richard-bevers" />
   </a>
 </header>
 <main>
   <div class="container">
     <div class="flex justify-center">
-      <img class="profile-picture" alt="Profielfoto" src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=richard-bevers" />
+      <img id="profile-picture-big" class="profile-picture" alt="Profielfoto" src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=richard-bevers" />
     </div>
-    <h1 class="text-center">
+    <h1 id="profile-name" class="text-center">
       Keygun Development
     </h1>
-    <form>
+    <form id="profile-form" method="POST">
       <div class="form">
         <div class="form-group">
           <label for="firstname">First name</label>
@@ -44,9 +44,10 @@
         </div>
         <div class="form-group">
           <label for="lastname">Last name</label>
-          <input type="email" id="lastname" name="lastname" placeholder="Text" />
+          <input type="text" id="lastname" name="lastname" placeholder="Text" />
         </div>
       </div>
+      <p id="error" class="error"></p>
       <button class="button-primary pointer" type="submit">
         Update
       </button>

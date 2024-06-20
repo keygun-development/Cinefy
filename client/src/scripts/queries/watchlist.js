@@ -1,12 +1,16 @@
 import { API_URL } from "../constants.js";
+import { user } from "../app.js";
 
 export async function addMovieToWatchlist(movieId) {
-  return await fetch(`${API_URL}/watchlists/1/${movieId}`, {
-    method: "POST",
-  });
+  if (movieId) {
+    return await fetch(`${API_URL}/watchlists/${user.id}/${movieId}`, {
+      method: "POST",
+    });
+  }
+  return null;
 }
 
 export async function getWatchlistMovies() {
-  const res = await fetch(`${API_URL}/watchlists/1/movies`);
+  const res = await fetch(`${API_URL}/watchlists/${user.id}/movies`);
   return await res.json();
 }

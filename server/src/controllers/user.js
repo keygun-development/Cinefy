@@ -1,5 +1,9 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { getUserByIdQuery, getUsersQuery } from "../database/queries/user.js";
+import {
+  getUserByIdQuery,
+  getUsersQuery,
+  updateUserQuery,
+} from "../database/queries/user.js";
 
 export function getUsers(req, res) {
   const users = getUsersQuery();
@@ -23,5 +27,22 @@ export function getUserById(req, res) {
     });
   }
 
+  console.log(user);
+
   return res.json(user);
+}
+
+export function updateUser(req, res) {
+  const id = parseInt(req.params.id);
+  const user = req.body;
+
+  if (!user) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: ReasonPhrases.BAD_REQUEST,
+    });
+  }
+
+  updateUserQuery(id, user);
+
+  return res.status(StatusCodes.OK).json(user);
 }

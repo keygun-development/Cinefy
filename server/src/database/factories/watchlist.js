@@ -6,7 +6,7 @@ export function seed() {
 
   if (watchListCount["COUNT(*)"] === 0) {
     const insertUser = db.prepare(
-      "INSERT INTO watchlists (userId, movieId) VALUES (@userId, @movieId)",
+      "INSERT INTO watchlists (user_id, movie_id) VALUES (@userId, @movieId)",
     );
 
     watchlists.forEach((movie) => {
