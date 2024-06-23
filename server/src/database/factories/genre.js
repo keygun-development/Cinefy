@@ -1,6 +1,7 @@
 import db from "../../db.js";
 import genres from "../seeders/genre.js";
 
+// This function seeds the genres table with the genres from the genres array.
 export function seed() {
   const genreCount = db.prepare("SELECT COUNT(*) from genres").get();
 

@@ -9,6 +9,7 @@ import {
 
 const router = express.Router();
 
+// GET /api/v1/watchlists
 router.get("/", getWatchlists);
 router.get("/:userId", getWatchlistByUserId);
 router.get("/:userId/movies", getWatchlistMoviesByUserId);

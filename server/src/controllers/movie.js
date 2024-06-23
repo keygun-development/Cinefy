@@ -4,6 +4,12 @@ import {
   getMoviesQuery,
 } from "../database/queries/movie.js";
 
+/**
+ * Get all movies
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function getMovies(req, res) {
   let { per_page, page, genre } = req.query;
   const movies = getMoviesQuery(per_page, page, genre);
@@ -17,6 +23,12 @@ export function getMovies(req, res) {
   return res.status(StatusCodes.OK).json(movies);
 }
 
+/**
+ * Get movie by id
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function getMovieById(req, res) {
   const id = parseInt(req.params.id);
   const movie = getMovieByIdQuery(id);

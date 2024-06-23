@@ -1,3 +1,4 @@
+// Cool slider class that allows you to drag the slider to scroll through the content
 class Slider {
     constructor(elementId) {
         this.slider = document.getElementById(elementId);

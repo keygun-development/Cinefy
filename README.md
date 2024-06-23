@@ -22,18 +22,13 @@ The server is built with Node.js and express.
 ```bash
 npm install
 ```
-
-3. Run the following command to setup the database
+3. Run the following command to start the server
 ```bash
-npm run db
-```
-4. Run the following command to start the server
-```bash
-npm run start
+npm run dev
 ```
 
 ## Github pages
 A live version of the website is hosted on Github pages!
 See: https://keygun-development.github.io/Cinefy/client/
 
-> **_NOTE:_**  I'm assuming that the server is running on localhost:3000. If you want to run the server on a different port, you need to change the request URL in the client code.
+> **_NOTE:_**  I'm assuming that the server is running on localhost:3000. If you want to run the server on a different port, you need to change the request URL in the client `constants.js` file.

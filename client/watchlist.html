@@ -33,7 +33,7 @@
         <h1>
             My Watchlist
         </h1>
-        <div class="card-scroll-list" id="watchlist"></div>
+        <div class="card-list" id="watchlist"></div>
     </div>
 </main>
 <footer>
@@ -63,41 +63,44 @@
         </a>
     </li>
 </ul>
-<div class="animated-modal" id="modal">
-    <a href="/">
-        <img src="https://occ-0-6144-768.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABer7SeWc6FvkBqWtk61GwL7rshAEVCOARQZVTEJGnLXykYBlO4nbbr6gs7M650BjULuaN6hucXKr5xY2iqPAajrxXd70HawdJeuD.jpg?r=608"
-             alt="Stranger things"/>
-    </a>
+<div class="animated-modal flex" data-open="false" id="modal">
+    <div id="modal-link" class="w-full">
+        <img id="modal-img"
+             src="https://occ-0-6144-768.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABer7SeWc6FvkBqWtk61GwL7rshAEVCOARQZVTEJGnLXykYBlO4nbbr6gs7M650BjULuaN6hucXKr5xY2iqPAajrxXd70HawdJeuD.jpg?r=608"
+             alt="Stranger things" />
+    </div>
     <div class="text-background-gradient">
-        <div class="button-back" id="back">
-            <svg style="rotate: 180deg" xmlns="http://www.w3.org/2000/svg" viewBox="-32 -32 448 576" width="50" height="50">
-                <circle cx="192" cy="256" r="224" fill="#FF0000" />
-                <path fill="#ffffff" transform="scale(0.5, 0.5) translate(192, 256)" d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
+        <div class="button-back" id="modal-back">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="#ffffff"
+                      d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+
             </svg>
         </div>
         <div class="container w-full flex justify-center">
             <div class="max-w-500">
-                <h1>
+                <h1 id="modal-title">
                     Stranger Things
                 </h1>
                 <div class="extras">
-                    <p class="button-primary rounded-full small">
+                    <p id="modal-genre" class="button-primary rounded-full small">
                         Genre
                     </p>
-                    <p>
+                    <p id="modal-year">
                         2016
                     </p>
                 </div>
-                <p class="line-clamp-3">
+                <p id="modal-description" class="line-clamp-3">
                     Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people
                     often prove more wicked than beasts.
                 </p>
-                <button class="button-primary pointer">
-                    Play
+                <button id="modal-button" class="button-primary pointer">
+                    Remove from watchlist
                 </button>
             </div>
         </div>
     </div>
 </div>
+<div class="movie-screen" id="movie-screen"></div>
 </body>
 </html>

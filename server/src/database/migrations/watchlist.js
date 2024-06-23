@@ -1,6 +1,7 @@
 import db from "../../db.js";
 import { seed } from "../factories/watchlist.js";
 
+// This migration creates the watchlists table.
 const createWatchlistTable = `CREATE TABLE IF NOT EXISTS watchlists
                               (
                                   id INTEGER PRIMARY KEY AUTOINCREMENT,

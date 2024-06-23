@@ -26,7 +26,8 @@
     </li>
   </ul>
   <a href="profile.html">
-    <img id="profile-picture" alt="Profielfoto" src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=richard-bevers" />
+    <img id="profile-picture" alt="Profielfoto"
+         src="https://api.dicebear.com/8.x/fun-emoji/svg?seed=keygun-development" />
   </a>
 </header>
 <main>
@@ -94,12 +95,12 @@
     </a>
   </li>
 </ul>
-<div class="animated-modal" data-open="false" id="modal">
-  <a target="_blank" id="modal-link" href="/">
+<div class="animated-modal flex" data-open="false" id="modal">
+  <div id="modal-link" class="w-full">
     <img id="modal-img"
          src="https://occ-0-6144-768.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABer7SeWc6FvkBqWtk61GwL7rshAEVCOARQZVTEJGnLXykYBlO4nbbr6gs7M650BjULuaN6hucXKr5xY2iqPAajrxXd70HawdJeuD.jpg?r=608"
          alt="Stranger things" />
-  </a>
+  </div>
   <div class="text-background-gradient">
     <div class="button-back" id="modal-back">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -126,11 +127,12 @@
           often prove more wicked than beasts.
         </p>
         <button id="modal-button" class="button-primary pointer">
-          Play
+          Remove from watchlist
         </button>
       </div>
     </div>
   </div>
 </div>
+<div class="movie-screen" id="movie-screen"></div>
 </body>
 </html>

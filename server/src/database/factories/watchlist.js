@@ -1,6 +1,7 @@
 import db from "../../db.js";
 import watchlists from "../seeders/watchlist.js";
 
+// This function seeds the watchlists table with the watchlists from the watchlists array.
 export function seed() {
   const watchListCount = db.prepare("SELECT COUNT(*) from watchlists").get();
 

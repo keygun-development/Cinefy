@@ -1,4 +1,4 @@
-import { setNewUser, user } from "../app.js";
+import { user } from "../app.js";
 
 const profilePicture = document.getElementById("profile-picture");
 const profilePictureBig = document.getElementById("profile-picture-big");

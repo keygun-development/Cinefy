@@ -23,6 +23,12 @@
     &.pointer {
         cursor: pointer;
     }
+
+    &:disabled {
+        background: var(--color-primary);
+        opacity: .6;
+        cursor: not-allowed;
+    }
 }
 
 .button-back {

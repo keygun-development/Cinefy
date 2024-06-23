@@ -1,6 +1,7 @@
 import db from "../../db.js";
 import movies from "../seeders/movie.js";
 
+// This function seeds the movies table with the movies from the movies array.
 export function seed() {
   const movieCount = db.prepare("SELECT COUNT(*) from movies").get();
 

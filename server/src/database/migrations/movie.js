@@ -1,6 +1,7 @@
 import db from "../../db.js";
 import { seed } from "../factories/movie.js";
 
+// This migration creates the movies table.
 const createMovieTable = `CREATE TABLE IF NOT EXISTS movies
                           (
                               id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -1,3 +1,4 @@
+// This file is the entry point of the server application.
 import express from "express";
 import cors from "cors";
 import genreRouter from "./routers/genre.js";

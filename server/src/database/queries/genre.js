@@ -1,5 +1,6 @@
 import db from "../../db.js";
 
+// Get all genres
 export function getGenresQuery(name) {
   if (name) {
     return db
@@ -10,6 +11,7 @@ export function getGenresQuery(name) {
   }
 }
 
+// Get genre by id
 export function getGenreByIdQuery(id) {
   return db.prepare("SELECT * FROM genres WHERE id = " + id).get();
 }

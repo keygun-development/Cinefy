@@ -22,7 +22,9 @@ if (profileForm) {
     const lastname = formData.get("lastname");
     if (!firstname || !lastname) {
       setError("Please fill in all fields");
+      return;
     }
+    setError(null);
     const result = await updateUser({ id: user.id, firstname, lastname });
     setNewUser(result);
   });

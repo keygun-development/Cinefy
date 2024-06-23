@@ -9,6 +9,12 @@ import {
 } from "../database/queries/watchlist.js";
 import { getMovieByIdQuery } from "../database/queries/movie.js";
 
+/**
+ * Get all watchlists
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function getWatchlists(req, res) {
   const watchlists = getWatchlistsQuery();
 
@@ -21,6 +27,12 @@ export function getWatchlists(req, res) {
   return res.status(StatusCodes.OK).json(watchlists);
 }
 
+/**
+ * Get watchlist by user id
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function getWatchlistByUserId(req, res) {
   const userId = parseInt(req.params.userId);
   const userWatchlist = getWatchlistByUserIdQuery(userId);
@@ -34,6 +46,12 @@ export function getWatchlistByUserId(req, res) {
   return res.status(StatusCodes.OK).json(userWatchlist);
 }
 
+/**
+ * Get watchlist movies by user id
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function getWatchlistMoviesByUserId(req, res) {
   const userId = parseInt(req.params.userId);
   const userWatchlist = getWatchlistMoviesByUserIdQuery(userId);
@@ -47,6 +65,12 @@ export function getWatchlistMoviesByUserId(req, res) {
   return res.status(StatusCodes.OK).json(userWatchlist);
 }
 
+/**
+ * Add movie to user watchlist
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function addMovieToUserWatchlist(req, res) {
   const userId = parseInt(req.params.userId);
   const movieId = parseInt(req.params.movieId);
@@ -65,14 +89,18 @@ export function addMovieToUserWatchlist(req, res) {
   return res.status(StatusCodes.CREATED).json(movie);
 }
 
+/**
+ * Remove movie from user watchlist
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 export function removeMovieFromUserWatchlist(req, res) {
   const userId = parseInt(req.params.userId);
   const movieId = parseInt(req.params.movieId);
-  const index = getWatchlistByUserIdQuery(userId).findIndex(
-    (w) => w.movieId === movieId,
-  );
+  const watchlist = getWatchlistByUserIdQuery(userId);
 
-  if (index === -1) {
+  if (watchlist.length === 0) {
     return res.status(StatusCodes.NOT_FOUND).json({
       message: ReasonPhrases.NOT_FOUND,
     });
@@ -80,5 +108,7 @@ export function removeMovieFromUserWatchlist(req, res) {
 
   removeMovieFromUserWatchlistQuery(userId, movieId);
 
-  return res.status(StatusCodes.NO_CONTENT).send();
+  return res.status(StatusCodes.OK).json({
+    message: "Movie removed from user watchlist",
+  });
 }
